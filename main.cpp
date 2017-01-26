@@ -74,7 +74,7 @@ std::vector<int> mergeSort(std::vector<int> vec){
     int middle=vec.size()/2;
  
     if(vec.size()==1)return vec;
-    else{
+    
         std::vector<int> first(vec.begin(), vec.begin()+middle);
         std::vector<int> second(vec.begin()+middle, vec.end());
         std::vector<int> fim(vec.size());
@@ -85,7 +85,7 @@ std::vector<int> mergeSort(std::vector<int> vec){
         merge_array(first, second, &fim);
        
         return fim;
-    }
+    
 }
 
 void quick(std::vector<int> *vec, int left, int right){
@@ -146,28 +146,35 @@ void heapSort(std::vector<int> &vec){
 
 int main(int argc, char* argv[]){
 	
-	int in;
+	int in, len_vec;
 	std::vector<int> vec;
-	
-	while(std::cin >> in){vec.push_back(in);}
+
+	std::cin >> len_vec;  //Correção feita, agora o primeiro numero do input é o tamanho do vetor
+	for(int i=0; i<len_vec; i++)std::cin>>in, vec.push_back(in);
 	
 	if(argc==2){
 
 		int param = atoi(argv[1]);
-		if(param==1){
-			vec = insertionSort(vec);
-		}else if(param==2){
-			vec = selectionSort(vec);
-		}else if(param==3){
-			vec = mergeSort(vec);
-		}else if(param==4){
-			vec = quickSort(vec);
-		}else if(param==5){
-			heapSort(vec);
-		}else{
-			fail();
-			return 1;
-		}
+		
+    if(param==1)
+      vec = insertionSort(vec);
+
+    else if(param==2)
+      vec = selectionSort(vec);
+
+    else if(param==3)
+      vec = mergeSort(vec);
+
+    else if(param==4)
+      vec = quickSort(vec);
+
+    else if(param==5)
+      heapSort(vec);
+
+    else{
+      fail();
+      return 1;
+    }
 		print_vector(vec);
  	}else{
 		fail();
